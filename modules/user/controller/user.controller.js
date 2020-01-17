@@ -1,14 +1,32 @@
+const userModel = require('../model/user.model');
 
-const database = require('../../database/database');
-
-findAll = (req,res) =>{
-    console.log("waiting for the database...");
-    database.selectQuery((result)=>{
-        res.json(result);
-        console.log("got the data..");
-    });  
+findAllUser = (req,res) => {
+    userModel.selectAllQuery((result)=>{
+        res.send(result);
+    })
+    
 }
 
+findSpecificUser = (req,res) =>{
+    userModel.selectSpecificUser(req.params.id,(result)=>{
+        res.send(result);
+    });
+}
+
+insertUser = (req,res) => {
+    console.log("inserting user...");
+    let keys = Object.keys(req.body);
+ 
+    let values = Object.values(req.body);
+    userModel.insertData(keys,values,(result)=>{
+        console.log("data inserted");
+        res.json(result);
+    })
+}
+
+
 module.exports = {
-    findAll
+    findAllUser,
+    findSpecificUser,
+    insertUser
 }
