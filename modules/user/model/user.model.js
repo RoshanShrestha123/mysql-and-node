@@ -20,18 +20,13 @@ selectSpecificUser =(id,callback)=>{
     })
 }
 insertData =(keys,values,callback)=>{
-    console.log("keys>> ",keys);
-    console.log("Values>> ",values);
-    console.log("inside the insert function ");
-    // const sql =`INSERT INTO ${tableName} VALUES ('200','punnya','duwal','bhaktapur')`;
-    // console.log("after query");
-    // db.query(sql,(err,result)=>{
-    //     console.log("inside db.query")
-    //     if(err) throw callback(err);
-    //     console.log(result);
-    //     callback(result);
+    const sql =`INSERT INTO ${tableName} (${keys}) VALUES (${values})`;
+    db.query(sql,(err,result)=>{
+        console.log("inside db.query")
+        if(err) throw callback(err);
+        callback();
         
-    // }) 
+    }) 
 }
 
 module.exports = {

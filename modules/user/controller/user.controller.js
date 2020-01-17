@@ -14,13 +14,16 @@ findSpecificUser = (req,res) =>{
 }
 
 insertUser = (req,res) => {
-    console.log("inserting user...");
-    let keys = Object.keys(req.body);
- 
-    let values = Object.values(req.body);
-    userModel.insertData(keys,values,(result)=>{
+    let keys = Object.keys(req.body).join(',');
+    let values = Object.values(req.body).map((element)=>{
+        return `'${element}'`;
+    });
+    valueString = values.join(',');
+    userModel.insertData(keys,valueString,()=>{
         console.log("data inserted");
-        res.json(result);
+        res.json({
+            mesg: " data inserted.."
+        })
     })
 }
 
