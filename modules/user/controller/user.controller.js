@@ -1,4 +1,5 @@
 const userModel = require('../model/user.model');
+const jwt = require('jsonwebtoken');
 
 findAllUser = (req,res) => {
     userModel.selectAllQuery((result)=>{
@@ -27,9 +28,24 @@ insertUser = (req,res) => {
     })
 }
 
+verifyToken = (req,res,next) =>{
+    const bearerToken = req.headers['authorization'];
+    console.log("token from header>> ",bearerToken);
+    if(bearerToken=== 'undefined') return console.log(" no token found");
+    const tokenHeader = bearerToken.split(' ');
+    const token = tokenHeader[1];
+    console.log("actual token >> ", token);
+    jwt.verify(token,'roshan',(err,result)=>{
+        if(err) throw err;
+        console.log("token is verfied..");
+        next();
+    })
+}
+
 
 module.exports = {
     findAllUser,
     findSpecificUser,
-    insertUser
+    insertUser,
+    verifyToken
 }
