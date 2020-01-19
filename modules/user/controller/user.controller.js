@@ -31,15 +31,20 @@ insertUser = (req,res) => {
 verifyToken = (req,res,next) =>{
     const bearerToken = req.headers['authorization'];
     console.log("token from header>> ",bearerToken);
-    if(bearerToken=== 'undefined') return console.log(" no token found");
-    const tokenHeader = bearerToken.split(' ');
-    const token = tokenHeader[1];
-    console.log("actual token >> ", token);
-    jwt.verify(token,'roshan',(err,result)=>{
+    if(bearerToken== undefined){
+        console.log("bearer token undefined");
+        res.send({meg:"no token found"})
+    }else{
+        const tokenHeader = bearerToken.split(' ');
+        const token = tokenHeader[1];
+        console.log("actual token >> ", token);
+        jwt.verify(token,'roshan',(err,result)=>{
         if(err) throw err;
         console.log("token is verfied..");
         next();
-    })
+    });
+    }
+    
 }
 
 

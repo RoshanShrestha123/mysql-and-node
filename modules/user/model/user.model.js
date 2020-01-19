@@ -33,4 +33,4 @@ module.exports = {
     selectAllQuery,
     selectSpecificUser,
     insertData
-}
+} 

@@ -8,14 +8,12 @@ generateToken= (user,callback) =>{
     })
 }
 login = (req,res) => {
-    // const user = {
-    //     id:1,
-    //     firstName:"roshan"
-    // }
     authModel.selectUser(1,"roshan",(user)=>{
         if(user!=null){
             generateToken(user,(token)=>{
-                console.log("token displayed>>",token);
+                res.json({
+                    token:token
+                })
                 
             });
         }else{
