@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
     host:"localhost",
-    user:"root",
-    password:"",
-    database:"express-learn"
+    user:"admin",
+    password:"password",
+    database:"database-learn"
 });
 
 dbConnect=(callback) => {

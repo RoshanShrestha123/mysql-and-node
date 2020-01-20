@@ -6,6 +6,6 @@ router.use((req,res,next)=>{
     console.log("this is the auth route");
     next();
 });
-router.get('/login',authController.login);
+router.post('/login',authController.login);
 
 module.exports = router;

@@ -8,21 +8,18 @@ generateToken= (user,callback) =>{
     })
 }
 login = (req,res) => {
+    console.log(req.body);
     authModel.selectUser(1,"roshan",(user)=>{
         if(user!=null){
             generateToken(user,(token)=>{
                 res.json({
                     token:token
-                })
-                
+                })              
             });
         }else{
             console.log("no user found");
-        }
-        
-    })
-    
-    
+        } 
+    })  
 }
 module.exports = {
     login
