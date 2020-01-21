@@ -9,7 +9,8 @@ generateToken= (user,callback) =>{
 }
 login = (req,res) => {
     console.log(req.body);
-    authModel.selectUser(1,"roshan",(user)=>{
+    const data = req.body;
+    authModel.selectUser(data.data.email,data.data.password,(user)=>{
         if(user!=null){
             generateToken(user,(token)=>{
                 res.json({

@@ -1,8 +1,10 @@
 const database = require('../../../config/database');
 const db = database.conn;
 const tableName = 'user_info';
-selectUser= (id,password,callback) => {
-    const sql = `SELECT * FROM ${tableName} WHERE id=${id}`;
+selectUser= (email,password,callback) => {
+    console.log("email>>> ",email);
+    console.log("password>>",password);
+    const sql = `SELECT * FROM ${tableName} WHERE email='${email}' AND password=${password} `;
     db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log("user>> ",result);
