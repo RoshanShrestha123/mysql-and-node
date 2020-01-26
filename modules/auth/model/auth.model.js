@@ -2,21 +2,20 @@ const database = require('../../../config/database');
 const db = database.conn;
 const tableName = 'user_info';
 selectUser= (email,password,callback) => {
-    console.log("email>>> ",email);
-    console.log("password>>",password);
-    const sql = `SELECT * FROM ${tableName} WHERE email='${email}' AND password=${password} `;
+    const sql = `SELECT * FROM ${tableName} WHERE email='${email}' AND password='${password}' `;
     db.query(sql,(err,result)=>{
-        if(err) throw err;
-        console.log("user>> ",result);
-        if(result == ''){
-            console.log("when empty> ",result);
-            callback(null);
-        }else{
-            callback(result);
-        }
         
+        callback(err,result);        
+    })
+}
+
+insertUser= (keys,values,callback) => {
+    const sql = `INSERT INTO ${tableName} (${keys}) VALUES (${values})`;
+    db.query(sql,(err,result)=>{
+        callback(err,result);
     })
 }
 module.exports = {
-    selectUser
+    selectUser,
+    insertUser
 }

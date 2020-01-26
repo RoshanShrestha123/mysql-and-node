@@ -3,7 +3,7 @@ const conn = mysql.createConnection({
     host:"localhost",
     user:"admin",
     password:"password",
-    database:"database-learn"
+    database:"trello-db"
 });
 
 dbConnect=(callback) => {

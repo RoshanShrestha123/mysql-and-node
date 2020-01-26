@@ -29,6 +29,7 @@ insertUser = (req,res) => {
 }
 
 verifyToken = (req,res,next) =>{
+  
     const bearerToken = req.headers['authorization'];
     console.log("token from header>> ",bearerToken);
     if(bearerToken== undefined){
@@ -40,7 +41,8 @@ verifyToken = (req,res,next) =>{
         console.log("actual token >> ", token);
         jwt.verify(token,'roshan',(err,result)=>{
         if(err) throw err;
-        console.log("token is verfied..");
+        console.log("token is verfied..",result.user[0].id);
+        req.userId = result.user[0].id;
         next();
     });
     }

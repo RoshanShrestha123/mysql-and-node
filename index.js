@@ -11,12 +11,19 @@ app.use(express.urlencoded({
 
 app.use(express.json()); //-> display the data in json [imp];
 
-//error handling middleware
-app.use((err,rep,res,next) => {
 
-})
 app.use('/api',API_ROUTE);
-
+//error handling middleware
+app.use((err,req,res,next) => {
+    if(err){
+        console.log(" error in the middleware section");
+        res.status(403).json({
+            mes: "error catched "
+        })
+    }
+    
+    
+})
 
 app.listen(4000,(err,res)=>{
     console.log("server started");
