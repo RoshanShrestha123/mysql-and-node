@@ -5,20 +5,16 @@ showBoards = (req,res,next) => {
     boardModel.selectAllBoards(userId,(err,result)=>{
         if(err!= null || result.length <=0){
             next(err);
-        }else{
-           
+        }else{  
             res.send({
                 data:result
             })
-        }
-       
-    })
-    
+        } 
+    })    
 }
 
 insertBoards = (req,res,next) => {
     const data = req.body;
-   
     const keys = Object.keys(data).join(',');
     const valueArr = Object.values(data).map((value)=>{
         return `'${value}'`;
