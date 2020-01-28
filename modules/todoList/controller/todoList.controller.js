@@ -2,7 +2,6 @@ const listModel = require('../model/todoList.model');
 showList = (req,res,next) => {
     const userId = req.userId;
     const id = req.params.id;
-    console.log(" id in the paramerter is: ",id)
     listModel.selectList(userId,id,(err,result)=>{
        if(err!= null || result.length <=0 ){
            next(err);
@@ -10,7 +9,6 @@ showList = (req,res,next) => {
            res.send({
                data:result
            })
-           console.log('todo list here>> ');
        }
     })
 }

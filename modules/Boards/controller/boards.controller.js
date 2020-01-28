@@ -15,13 +15,17 @@ showBoards = (req,res,next) => {
 
 insertBoards = (req,res,next) => {
     const data = req.body;
+    data.userId = req.userId;
     const keys = Object.keys(data).join(',');
     const valueArr = Object.values(data).map((value)=>{
         return `'${value}'`;
     });
     const values = valueArr.join(',');
     boardModel.insertNewBoard(keys,values,(err,result)=>{
-        console.log("data inserted",err);
+        console.log("data inserted",result);
+        res.send({
+            mesg: " data inserted"
+        })
     })
 }
 module.exports = {
